@@ -1,0 +1,1131 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+
+    {#links#}
+    {% include "includes/HeaderLinks.html" %}
+
+    <style>
+        .hero-slide {
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+        }
+        .game-tile {
+            transition: transform 0.3s ease;
+        }
+        .game-tile:hover {
+            transform: translateY(-5px);
+        }
+        .nav-link:hover {
+            color: #00aeff;
+        }
+        @layer utilities {
+            .bg-download-section {
+                background-image: url('https://cdn2.steamgriddb.com/hero/e769e03a9d329b2e864b4bf4ff54ff39.png');
+                background-size: cover;
+                background-position: center;
+            }
+        }
+       
+
+         .battle-net-loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0e0e0e;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .battle-net-logo {
+            width: 150px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .battle-net-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(0, 174, 239, 0.2);
+            border-top: 4px solid #00aeef;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .battle-net-progress {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-top: 25px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .battle-net-progress-bar {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, #00aeef, #0082d6);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .battle-net-loading-text {
+            color: #fff;
+            margin-top: 15px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- LOADING -->
+      <div class="battle-net-loading">
+        <!-- لوگوی Battle.net (میتونی لینک عکس واقعی رو بذاری) -->
+        <img class="battle-net-logo" src="https://bnetcmsus-a.akamaihd.net/cms/page_media/1l/1LBON0FWR9J01623119560966.png" alt="Battle.net Shop">
+        
+        <!-- اسپینر لودینگ -->
+        <div class="battle-net-spinner"></div>
+        
+        <!-- نوار پیشرفت -->
+        <div class="battle-net-progress">
+            <div class="battle-net-progress-bar"></div>
+        </div>
+        
+        <!-- متن لودینگ -->
+        <div class="battle-net-loading-text">Loading your shop experience...</div>
+    </div>
+
+    <!-- محتوای اصلی سایت (مخفی تا لودینگ تموم شه) -->
+    <div id="main-content" style="display: none;">
+    </div>
+
+
+     <!-- ................... -->
+      <!-- Navigation -->
+      {% include "includes/header.html" %}
+<!-- ....................................................................................................................................... -->
+    <!--  -->
+    <!-- Slider -->
+    <div class="swiper heroSwiper w-full">
+        <div class="swiper-wrapper">
+            <!-- 1 -->
+            <!-- Image -->
+            <div class="swiper-slide hero-slide" style="background-image: url('https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt48551acf9cdc0487/67ae4b10180a1fb9ef0e39c1/WoW_ClassicMOPBundle_BnetShop_HeaderDesktop_1600x500.png?imwidth=1568&imdensity=1')">
+                <div class="bg-gradient-to-r from-black to-transparent h-full flex items-center">
+                    <div class="container mx-auto px-6">
+                        <!-- Logo -->
+                        <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt727af021bc3deb16/67b66d3489e4f3869dbbf005/WoW_Mists_of_Pandaria_Classic_Logo_Horizontal_01_v2.png?imwidth=320&imdensity=1" alt="">
+                        <!-- Description -->
+                        <p class="text-xl mb-6 max-w-sm my-4">Get two new mounts, a max-level character boost, and more with a Sha-Infused Epic Pack!</p>
+                        <div class="flex space-x-4">
+                            <!-- Button -->
+                            <a href="https://us.shop.battle.net/en-us/product/world-of-warcraft-mists-of-pandaria-classic-upgrades?p=1891542"><button class="bg-blue-600 hover:bg-blue-700 px-20 py-4 rounded font-medium mx-10">BUY NOW</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+              <!-- 2 -->
+            <!-- Image -->
+            <div class="swiper-slide hero-slide" style="background-image: url('https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blte550963beaa5c165/67bd18707addc55c562d5dd9/Desktop-Banner-Home-1600x500.jpg?imwidth=1568&imdensity=1')">
+                <div class="bg-gradient-to-r from-black to-transparent h-full flex items-center">
+                    <div class="container mx-auto px-6">
+                        <!-- Logo -->
+                        <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blte37d2c0f698a6b2e/67bd0a9f9027f9dcbb16f55c/-Bnet_Game-Game_Logo_Product-EN-_1000px_Wide.png?imwidth=320&imdensity=1" alt="">
+                        <!-- Description -->
+                        <p class="text-xl mb-6 max-w-sm my-4">Pre-purchase and get Foundry Demo access and more!</p>
+                        <div class="flex space-x-4">
+                            <!-- Button -->
+                            <a href="https://us.shop.battle.net/en-us/product/tony-hawks-pro-skater-3-4"><button class="bg-blue-600 hover:bg-blue-700 px-20 py-4 rounded font-medium mx-4">Pre-purchase Now</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+              <!-- 3 -->
+            <!-- Image -->
+            <div class="swiper-slide hero-slide" style="background-image: url('https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt807ebd6f5ef95044/6790257ae1fda20f70f8551d/S2_BC_Art_1P-Bnet_Game-Banner_Desktop-EN-1600x500.jpg?imwidth=1568&imdensity=1')">
+                <div class="bg-gradient-to-r from-black to-transparent h-full flex items-center">
+                    <div class="container mx-auto px-6">
+                        <!-- Logo -->
+                        <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt2845b22b224e4afe/672be06d8a2e26f5c1f02c70/-Bnet_Shop_ProductPage_Logo-EN.png?imwidth=320&imdensity=1" alt="">
+                        <!-- Description -->
+                        <p class="text-xl mb-6 max-w-sm my-4">Season 2 is live. Get the new BlackCell Pack.</p>
+                        <div class="flex space-x-4">
+                            <!-- Button -->
+                           <a href="https://us.shop.battle.net/en-us/product/call-of-duty-black-ops-6-wz-black-cell-pack-s3?p=1865659"> <button class="bg-blue-600 hover:bg-blue-700 px-20 py-4 rounded font-medium mx-10">BUY NOW</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <!-- 4 -->
+            <!-- Image -->
+            <div class="swiper-slide hero-slide" style="background-image: url('https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt787b0d4896f357fc/67ad50f14b52ff78d4e7755c/HS_31p6_ITED_MegaBundle_PP_BattleNet_HomepageHeader_Desktop_1600x500_RN01.jpg?imwidth=1568&imdensity=1')">
+                <div class="bg-gradient-to-r from-black to-transparent h-full flex items-center">
+                    <div class="container mx-auto px-6">
+                        <!-- Logo -->
+                        <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt4bda7925b2b5578d/67ad518806b898ca0cd34895/HS_32p0_TED_Logo_Battlenet_enUS_354x220_wHS.png?imwidth=320&imdensity=1" alt="">
+                        <!-- Description -->
+                        <p class="text-xl mb-6 max-w-sm my-4">Ysera awaits! Help defend the World Tree from the Nightmare</p>
+                        <div class="flex space-x-4">
+                            <!-- Button -->
+                           <a href="https://us.shop.battle.net/en-us/product/hearthstone-into-the-emerald-dream-tavern-pass?p=1911679"> <button class="bg-blue-600 hover:bg-blue-700 px-20 py-4 rounded font-medium mx-4">Pre-purchase Now</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 5 -->
+            <!-- Image -->
+            <div class="swiper-slide hero-slide" style="background-image: url('https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt5234fd45ba27f822/67ab9912374922fa1268dcbd/A_BNET_ShopBannerDesktop_1600x500.png?imwidth=1568&imdensity=1')">
+                <div class="bg-gradient-to-r from-black to-transparent h-full flex items-center">
+                    <div class="container mx-auto px-6">
+                        <!-- Logo -->
+                        <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt3b2e919015bfafed/67aa857e7113287f7117ffc0/OW2_S15-small-Logo_FINAL_SA_darkbg_enUS.png?imwidth=320&imdensity=1" alt="">
+                        <!-- Description -->
+                        <p class="text-xl mb-6 max-w-sm my-4">The Premium Battle Pass has leveled up with Legendary loot!</p>
+                        <div class="flex space-x-4">
+                            <!-- Button -->
+                            <a href="https://us.shop.battle.net/en-us/family/overwatch"><button class="bg-blue-600 hover:bg-blue-700 px-20 py-4 rounded font-medium mx-12">BUY NOW</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <!-- 6 -->
+            <!-- Image -->
+            <div class="swiper-slide hero-slide" style="background-image: url('https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt24b6cbc89d20d52f/67339ce45b3e2d40dae5fcd4/shop_landing_carousel_avowed_desktop.webp?imwidth=1568&imdensity=1')">
+                <div class="bg-gradient-to-r from-black to-transparent h-full flex items-center">
+                    <div class="container mx-auto px-6">
+                        <!-- Logo -->
+                        <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/bltfc7d5217004b573b/67324f4eef121677b3bf69eb/shop_logo_avowed.webp?imwidth=320&imdensity=1" alt="">
+                        <!-- Description -->
+                        <p class="text-xl mb-6 max-w-sm my-4">Available Now.You Can Play It Now.</p>
+                        <div class="flex space-x-4">
+                            <!-- Button -->
+                            <a href="https://us.shop.battle.net/en-us/product/avowed"><button class="bg-blue-600 hover:bg-blue-700 px-20 py-4 rounded font-medium mx-10">BUY NOW</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+
+
+    <!-- Recommended Games -->
+    <div class="container mx-auto px-4 py-16">
+        <h2 class="text-3xl font-bold mb-8">Recommended</h2>
+        <div class="swiper gameSwiper">
+            <div class="swiper-wrapper pb-10">
+                <!-- 1 -->
+         <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/product/world-of-warcraft-the-war-within"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt8251b00af5c9b40a/66bfcb5b7e3fe282ad56f73c/WOW_11.0_TWW_LaunchBanners-Destruction_Launcher_FranchisePhoenix_1920x1080_JL01b.png?imwidth=332&imdensity=1" alt="World of Warcraft" class="w-full">
+                    <div class="p-4">
+                    <!-- Icon -->
+                    <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                    <!-- gameName -->
+                    <h6 class="text-slate-400 font-bold mx-14">World of Warcraft</h6>
+                    <!-- gameTitle -->
+                    <h3 class="text-xl font-bold mb-2 mx-3">World of Warcraft®: The War Within™</h3>
+                    <!-- description -->
+                    <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Now live! Get a Level 70 Boost included in all editions and get back in the fight.</p>
+                    <!-- Price -->
+                    <span class="text-xl font-bold mx-3">$49.99</span>
+                </div>
+            </div></a>
+                </div>
+                <!-- 2 -->
+                <div class="swiper-slide game-tile">
+                 <a href="https://us.shop.battle.net/en-us/product/diablo-iv?p=1831028">   <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt6de29b9f5831600b/66568f92b468e237b6be828e/DIA_DIV_X1_BNET_PRE_PURCHASE_static_browsing_card_combo_1920x1080.png?imwidth=332&imdensity=1" alt="World of Warcraft" class="w-full">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">World of Warcraft</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">Diablo® IV Expansion Bundle</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Vessel of Hatred Available Now!</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3">$69.99</span>
+                    </div>
+                </div></a>
+                </div>
+                 <!-- 3 -->
+                 <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/product/call-of-duty-black-ops-6?p=1760240"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/bltdfd26d2c32d19428/6657ade2a18b1660eed4ca63/-Bnet_Game-Card_Product_browsing-EN-960x540_(6).jpg?imwidth=332&imdensity=1" alt="World of Warcraft" class="w-full">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">Call of Duty Black</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">Call of Duty®: Black Ops 6 - Vault Edition</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Action Shooter</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3">$99.99</span>
+                    </div>
+                </div></a>
+                </div>
+                 <!-- 4 -->
+                 <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/product/overwatch?p=1007996"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt99028ee4c0956a85/67aa9f43f593ce7476ebb0ac/OW2_2024_S15-Launch-BNET_SA01_BNET_shopbrowsing_1920x1080.png?imwidth=332&imdensity=1" alt="World of Warcraft" class="w-full">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">Overwatch 2</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">Overwatch® 2 : The War</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Team-Based Action Game</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3 ">Play For Free</span>
+                    </div>
+                </div></a>
+                </div>
+                <!-- 5 -->
+                <div class="swiper-slide game-tile">
+                    <a href="https://us.shop.battle.net/en-us/product/hearthstone?p=29509"><div class="bg-gray-800 rounded-lg overflow-hidden">
+                        <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt6de29b9f5831600b/66568f92b468e237b6be828e/DIA_DIV_X1_BNET_PRE_PURCHASE_static_browsing_card_combo_1920x1080.png?imwidth=332&imdensity=1" alt="World of Warcraft" class="w-full">
+                        <div class="p-4">
+                            <!-- Icon -->
+                             <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                            <!-- gameName -->
+                            <h6 class="text-slate-400 font-bold mx-14">Hearthstone</h6>
+                            <!-- gameTitle -->
+                            <h3 class="text-xl font-bold mb-2 mx-3">Hearthstone® : THE CENTURY</h3>
+                            <!-- description -->
+                            <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Strategy Card Game</p>
+                            <!-- Price -->
+                            <span class="text-xl font-bold mx-3">Play For Free</span>
+                        </div>
+                    </div></a>
+                </div>
+                <!-- 6 -->
+                <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/product/call-of-duty-warzone-2"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt825dc158da3cd435/63619505791b1444d8d1d39a/CODWZ2_S1-Bnet_Game-Product_Browsing_Card-960x540.jpg?imwidth=332&imdensity=1" alt="World of Warcraft" class="w-full">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">Call of Duty: Warzone</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">Call of Duty®: Warzone</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Free for everyone</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3">Play For Free</span>
+                    </div>
+                </div></a>
+                </div>
+                <!-- 7 -->
+                <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/product/diablo-immortal?p=854533"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/bltd5baa2f3baef945d/621d51fc04503350d255bb74/Family_Page_Browsing_Card_Desktop_Mobile_960x540.png?imwidth=332&imdensity=1" alt="World of Warcraft" class="w-full">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">Diablo Immortal</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">Diablo Immortal™ : Exclusive</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Action RPG</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3">Play For Free</span>
+                    </div>
+                </div></a>
+                </div>
+                <!-- 8 -->
+                <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/product/diablo_ii_resurrected?p=74831"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbBJM-AfBPoPdADaezvKTf5CXTAAjM2IhMdA&s" alt="World of Warcraft" class="w-full h-[162px]">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">Diablo II</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">Diablo II: Resurrected Way™</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Evil is Resurrected</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3">$39.99</span>
+                    </div>
+                </div></a>
+                </div>
+                <!-- 9 -->
+                <div class="swiper-slide game-tile">
+                    <a href="https://us.shop.battle.net/en-us/product/warcraft-3-reforged?p=44414"><div class="bg-gray-800 rounded-lg overflow-hidden">
+                        <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt1953c897e611639b/67325d79d32591b8409e778b/Feature1_Reforged_20_Patch.png?imwidth=332&imdensity=1" alt="World of Warcraft" class="w-full">
+                        <div class="p-4">
+                            <!-- Icon -->
+                             <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                            <!-- gameName -->
+                            <h6 class="text-slate-400 font-bold mx-14">Warcraft III</h6>
+                            <!-- gameTitle -->
+                            <h3 class="text-xl font-bold mb-2 mx-3">Warcraft® III: Reforged Game</h3>
+                            <!-- description -->
+                            <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">A major new update is live with graphical improvements, improved functionality, UI features, and more!</p>
+                            <!-- Price -->
+                            <span class="text-xl font-bold mx-3">$29.99</span>
+                        </div>
+                    </div></a>
+                </div>
+                <!-- 10 -->
+                <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/product/starcraft-ii-campaign-collection?p=32192"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://cdn.mos.cms.futurecdn.net/e8b41229972d67a29c954947717ae8d8.jpg" alt="World of Warcraft" class="w-full h-[160px]">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">StarCraft II</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">StarCraft® II: Campaign Collection™</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Real-time Strategy</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3">$39.99</span>
+                    </div>
+                </div></a>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+     <!-- End Recommended -->
+     <!--  -->
+     <!-- Featured Games -->
+     <div class="container mx-auto px-4 py-16">
+        <h2 class="text-3xl font-bold mb-8">Featured</h2>
+        <div class="swiper gameSwiper">
+            <div class="swiper-wrapper pb-10">
+                <!-- 1 -->
+         <div class="swiper-slide game-tile">
+                    <a href="https://us.shop.battle.net/en-us/product/tony-hawks-pro-skater-3-4"><div class="bg-gray-800 rounded-lg overflow-hidden">
+                        <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/bltb17a721b32241b04/67be0f3ffa0ab86e90a0dee3/-Bnet_Game-Card_Product_Browsing-960x540_(1).jpg?imwidth=332&imdensity=1" alt="World of Warcraft" class="w-full">
+                        <div class="p-4">
+                            <!-- Icon -->
+                             <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                            <!-- gameName -->
+                            <h6 class="text-slate-400 font-bold mx-14">Tony Hawk</h6>
+                            <!-- gameTitle -->
+                            <h3 class="text-xl font-bold mb-2 mx-3">Tony Hawk's Pro Skater 3 + 4 </h3>
+                            <!-- description -->
+                            <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Available July 11th - Pre-purchase and get Foundry Demo access* and more!</p>
+                            <!-- Price -->
+                            <span class="text-xl font-bold mx-3">$69.99</span>
+                        </div>
+                    </div></a>
+                </div>
+                <!-- 2 -->
+                <div class="swiper-slide game-tile">
+                    <a href="https://us.shop.battle.net/en-us/product/overwatch-battle-pass"><div class="bg-gray-800 rounded-lg overflow-hidden">
+                        <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt552eb8f576520594/67aa71dff3d509f7541fd00b/OW2_2025_S15-Premium-BP-BNET_SHOP-assetgallery_1920x1080.png?imwidth=332&imdensity=1" alt="World of Warcraft" class="w-full">
+                        <div class="p-4">
+                            <!-- Icon -->
+                             <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                            <!-- gameName -->
+                            <h6 class="text-slate-400 font-bold mx-14">Overwatch® 2</h6>
+                            <!-- gameTitle -->
+                            <h3 class="text-xl font-bold mb-2 mx-3">Overwatch® 2 Premium Battle Pass: Season 15</h3>
+                            <!-- description -->
+                            <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Vessel of Hatred Available Now!</p>
+                            <!-- Price -->
+                            <span class="text-xl font-bold mx-3">$39.99</span>
+                        </div>
+                    </div></a>
+                </div>
+                 <!-- 3 -->
+                 <div class="swiper-slide game-tile">
+                    <a href="https://us.shop.battle.net/en-us/product/world-of-warcraft-mists-of-pandaria-classic-upgrades?p=1891542"><div class="bg-gray-800 rounded-lg overflow-hidden">
+                        <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blte48d7d0644bd34da/67ace2c4c0924def4cef8ea6/WoW_ClassicMOPBundle_BnetShop_BrowsingCard_Epic_1920x1080.png?imwidth=332&imdensity=1" alt="World of Warcraft" class="w-full">
+                        <div class="p-4">
+                            <!-- Icon -->
+                             <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                            <!-- gameName -->
+                            <h6 class="text-slate-400 font-bold mx-14">World of Warcraft Mists of Pandaria </h6>
+                            <!-- gameTitle -->
+                            <h3 class="text-xl font-bold mb-2 mx-3">Sha-Infused Epic Pack</h3>
+                            <!-- description -->
+                            <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Mists of Pandaria Classic will be included with Subscription or Game Time. Get a bounty of Sha-infused cosmetics for both Modern and Classic Progression now!</p>
+                            <!-- Price -->
+                            <span class="text-xl font-bold mx-3">$79.99</span>
+                        </div>
+                    </div></a>
+                </div>
+                 <!-- 4 -->
+                 <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/product/diablo-iv?p=1766298"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/bltff6fdf959163a5a7/66568f9109d7e5fe2b1514ba/DIA_DIV_X1_BNET_PRE_PURCHASE_static_browsing_card_ultimate_1920x1080.png?imwidth=332&imdensity=1" alt="World of Warcraft" class="w-full">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">Diablo IV</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">Diablo® IV: Vessel of Hatred - Ultimate</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Vessel of Hatred Available Now!</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3 ">$89.99</span>
+                    </div>
+                </div></a>
+                </div>
+                <!-- 5 -->
+                <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/product/world-of-warcraft-the-war-within"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt8251b00af5c9b40a/66bfcb5b7e3fe282ad56f73c/WOW_11.0_TWW_LaunchBanners-Destruction_Launcher_FranchisePhoenix_1920x1080_JL01b.png?imwidth=332&imdensity=1" alt="World of Warcraft" class="w-full">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">World of Warcraft</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">World of Warcraft®: The War Within™</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Now live! Get a Level 70 Boost included in all editions and get back in the fight.</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3">$89.99</span>
+                    </div>
+                </div></a>
+                </div>
+                <!-- 6 -->
+                <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/product/call-of-duty-black-ops-6?p=1760240"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/bltdfd26d2c32d19428/6657ade2a18b1660eed4ca63/-Bnet_Game-Card_Product_browsing-EN-960x540_(6).jpg?imwidth=332&imdensity=1" alt="World of Warcraft" class="w-full">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">Call of Duty</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">Call of Duty®: Black Ops 6 - Vault Edition</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Action Shooter</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3">$89.99</span>
+                    </div>
+                </div></a>
+                </div>
+                <!-- 7 -->
+                <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/product/hearthstone-into-the-emerald-dream-tavern-pass?p=1911679"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt112f8a8a1f81689c/67aa52c7b21737d2534b6356/HS_31p6_ITED_MegaBundle_PP_BattlenetShop_BrowsingCard_1920x1080_NoChest_RN02.jpg?imwidth=332&imdensity=1" alt="World of Warcraft" class="w-full">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">HEARTSTONE</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">Into the Emerald Dream Mega Bundle</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Available through March 24, 2025</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3">$89.99</span>
+                    </div>
+                </div></a>
+                </div>
+                <!-- 8 -->
+                <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/product/diablo-iv?p=1766298"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt07fc4a6f1feeb987/677f152288d064323c221988/DIA_DIV_S7_launch_s7_battlepass_feature_image_bchbl_stat_enus_1920x1080_RD1_1_GG01_(1).png?imwidth=332&imdensity=1" alt="World of Warcraft" class="w-full h-[162px]">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">Diablo IV</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">Accelerated Battle Pass - Season of Witchcraft</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Get the Premium Battle pass plus 20 Tier Skips and “Magic of Mushrooms” emote!</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3">$54.99</span>
+                    </div>
+                </div></a>
+                </div>
+                <!-- 9 -->
+                <div class="swiper-slide game-tile">
+                    <a href="https://us.shop.battle.net/en-us/product/call-of-duty-black-ops-6-wz-black-cell-pack-s3?p=1865659"><div class="bg-gray-800 rounded-lg overflow-hidden">
+                        <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/bltf1a8fcb18d424eb4/678ad12f7b64d4412d01aa78/S2_BC_Art_1P-Bnet_Game-Card_Feature_4-EN-960x540.jpg?imwidth=332&imdensity=2" alt="World of Warcraft" class="w-full h-[162px]">
+                        <div class="p-4">
+                            <!-- Icon -->
+                             <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                            <!-- gameName -->
+                            <h6 class="text-slate-400 font-bold mx-14">Call of Duty</h6>
+                            <!-- gameTitle -->
+                            <h3 class="text-xl font-bold mb-2 mx-3">Call of Duty®: Black Ops 6 - BlackCell </h3>
+                            <!-- description -->
+                            <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">In-game content</p>
+                            <!-- Price -->
+                            <span class="text-xl font-bold mx-3">$29.99</span>
+                        </div>
+                    </div></a>
+                </div>
+                <!-- 10 -->
+                <div class="swiper-slide game-tile">
+                    <div class="bg-gray-800 rounded-lg overflow-hidden">
+                        <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt6d2c83fb78848930/67b6420ba24bb3e117df0604/WoW_-_Shop_Red_Panda_Bundle_BnetShop_BUNDLE_ProductAssetGallery_1920x1080.png?imwidth=332&imdensity=2" alt="World of Warcraft" class="w-full h-[162px]">
+                        <div class="p-4">
+                            <!-- Icon -->
+                             <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                            <!-- gameName -->
+                            <h6 class="text-slate-400 font-bold mx-14">World of Warcraft</h6>
+                            <!-- gameTitle -->
+                            <h3 class="text-xl font-bold mb-2 mx-3">Marvelous Meeksi Pack Bundle</h3>
+                            <!-- description -->
+                            <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Get all five brew-themed varieties for a limited time!</p>
+                            <!-- Price -->
+                            <span class="text-xl font-bold mx-3">$65.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+     <!-- End Recommended -->
+      <!--  -->
+     <!-- TrendingNow Games -->
+     <div class="container mx-auto px-4 py-16">
+        <h2 class="text-3xl font-bold mb-8">Trending Now</h2>
+        <div class="swiper gameSwiper">
+            <div class="swiper-wrapper pb-10">
+                <!-- 1 -->
+         <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/product/balance?p=15989"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt57a421d9cc7b9cc7/6435dd4ed402e526b209460e/Battlenet-Balance.jpg?imwidth=332&imdensity=2" alt="World of Warcraft" class="w-full">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">Battle.net Services</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">Battle.net® Balance Service</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Battle.net Balances Services</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3">$9.99</span>
+                    </div>
+                </div></a>
+                </div>
+                <!-- 2 -->
+                <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/product/battle-tag-name-change?p=22087"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt65313c75181aa239/6435dd3e9c5c306d4219a13f/BattleTag-Change.jpg?imwidth=332&imdensity=2" alt="World of Warcraft" class="w-full">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">Battle.net Services</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">BattleTag Change Service</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Game Services</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3">$10.00</span>
+                    </div>
+                </div></a>
+                </div>
+                 <!-- 3 -->
+                 <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/product/eternal-orbs"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/bltacdc7f5c58a2bca4/66568f9142baa4797b6aeadb/DIA_DIV_X1_BNET_PRE_PURCHASE_static_browsing_card_standard_1920x1080.png?imwidth=332&imdensity=2" alt="World of Warcraft" class="w-full">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">Diablo IV</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">Diablo® IV: Vessel of Hatred - Standard</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Vessel of Hatred Available Now!</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3">$39.99</span>
+                    </div>
+                </div></a>
+                </div>
+                 <!-- 4 -->
+                 <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/product/starcraft-ii-mira-horner-commander?p=32729"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://cdn.mos.cms.futurecdn.net/e8b41229972d67a29c954947717ae8d8.jpg" alt="World of Warcraft" class="w-full h-[160px]">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">StarCraft II</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">Commander: Tychus Version</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Commanders</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3 ">$4.99</span>
+                    </div>
+                </div></a>
+                </div>
+                <!-- 5 -->
+                <div class="swiper-slide game-tile">
+                  <a href="https://us.shop.battle.net/en-us/product/overwatch-coins">  <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt5387d7cefaf9923d/6334e1997e84e17596f9c816/Coins_960x540.png?imwidth=332&imdensity=2" alt="World of Warcraft" class="w-full">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">Overwatch 2</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">Overwatch® 2 – Overwatch Coins</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Use Overwatch Coins to Get the Premium Battle Pass and More!</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3">$4.99</span>
+                    </div>
+                </div></a>
+                </div>
+                <!-- 6 -->
+                <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/product/overwatch-starter-pack?p=1890334"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt5f495bf737436c89/67aa70f6e1fda22196f85686/OW2_S15_StarterPack_BNET_Shop_ProductAssetGallery_1920x1080.png?imwidth=332&imdensity=2" alt="World of Warcraft" class="w-full">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">Overwatch 2</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">Overwatch® 2 Starter Pack: Season 15</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Get a head start to the season with 1000 Overwatch Coins and Bixi Hazard!</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3">$9.99</span>
+                    </div>
+                </div></a>
+                </div>
+                <!-- 7 -->
+                <div class="swiper-slide game-tile">
+                    <a href="https://us.shop.battle.net/en-us/product/hearthstone-adventure-rumble-run?p=73820"><div class="bg-gray-800 rounded-lg overflow-hidden">
+                        <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt112f8a8a1f81689c/67aa52c7b21737d2534b6356/HS_31p6_ITED_MegaBundle_PP_BattlenetShop_BrowsingCard_1920x1080_NoChest_RN02.jpg?imwidth=332&imdensity=2" alt="World of Warcraft" class="w-full">
+                        <div class="p-4">
+                            <!-- Icon -->
+                             <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                            <!-- gameName -->
+                            <h6 class="text-slate-400 font-bold mx-14">HEARTSTONE</h6>
+                            <!-- gameTitle -->
+                            <h3 class="text-xl font-bold mb-2 mx-3">Into the Emerald Dream Mega Bundle</h3>
+                            <!-- description -->
+                            <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Available through March 24, 2025</p>
+                            <!-- Price -->
+                            <span class="text-xl font-bold mx-3">$79.99</span>
+                        </div>
+                    </div></a>
+                </div>
+                <!-- 8 -->
+                <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/family/diablo-iii"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2020/02/Diablo-3-Splash-Art-Blizzard.jpg" alt="World of Warcraft" class="w-full h-[162px]">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">Diablo III</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">Diablo® III : Eternal Collection</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Action RPG</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3">$19.99</span>
+                    </div>
+                </div></a>
+                </div>
+                <!-- 9 -->
+                <div class="swiper-slide game-tile">
+                    <a href="https://us.shop.battle.net/en-us/product/starcraft-ii-campaign-collection?p=32192"><div class="bg-gray-800 rounded-lg overflow-hidden">
+                        <img src="https://cdn.wccftech.com/wp-content/uploads/2016/09/legacy-void.jpg" alt="World of Warcraft" class="w-full h-[162px]">
+                        <div class="p-4">
+                            <!-- Icon -->
+                             <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                            <!-- gameName -->
+                            <h6 class="text-slate-400 font-bold mx-14">StarCraft II</h6>
+                            <!-- gameTitle -->
+                            <h3 class="text-xl font-bold mb-2 mx-3">Commander: Stukov Edition</h3>
+                            <!-- description -->
+                            <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">In-game content</p>
+                            <!-- Price -->
+                            <span class="text-xl font-bold mx-3">$4.99</span>
+                        </div>
+                    </div></a>
+                </div>
+                <!-- 10 -->
+                <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/family/diablo-iii"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt63ee63d378619ce9/67ed8cb72fa2eeb2510a80f1/DIA_D3_Bnet_Patch2.7.8_Textless_1920x1080.png" alt="World of Warcraft" class="w-full h-[162px]">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">Diablo III</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">Diablo® III: Rise of the Necromancer</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Requires Diablo III: Reaper of Souls</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3">$14.99</span>
+                    </div>
+                </div></a>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+     <!-- End Trending Now -->
+      <!--  -->
+     <!-- Most Gifted -->
+     <div class="container mx-auto px-4 py-16">
+        <h2 class="text-3xl font-bold mb-8">Most Gifted</h2>
+        <div class="swiper gameSwiper">
+            <div class="swiper-wrapper pb-10">
+                <!-- 1 -->
+         <div class="swiper-slide game-tile">
+                    <a href="https://us.shop.battle.net/en-us/product/world-of-warcraft-the-war-within"><div class="bg-gray-800 rounded-lg overflow-hidden">
+                        <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt8251b00af5c9b40a/66bfcb5b7e3fe282ad56f73c/WOW_11.0_TWW_LaunchBanners-Destruction_Launcher_FranchisePhoenix_1920x1080_JL01b.png?imwidth=332&imdensity=2" alt="World of Warcraft" class="w-full">
+                        <div class="p-4">
+                            <!-- Icon -->
+                             <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                            <!-- gameName -->
+                            <h6 class="text-slate-400 font-bold mx-14">World of Warcraft</h6>
+                            <!-- gameTitle -->
+                            <h3 class="text-xl font-bold mb-2 mx-3">World of Warcraft®: The War Within™</h3>
+                            <!-- description -->
+                            <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Now live! Get a Level 70 Boost included in all editions and get back in the fight. </p>
+                            <!-- Price -->
+                            <span class="text-xl font-bold mx-3">$49.99</span>
+                        </div>
+                    </div></a>
+                </div>
+                <!-- 2 -->
+                <div class="swiper-slide game-tile">
+                    <a href="https://us.shop.battle.net/en-us/product/battle-tag-name-change?p=22087"><div class="bg-gray-800 rounded-lg overflow-hidden">
+                        <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt57a421d9cc7b9cc7/6435dd4ed402e526b209460e/Battlenet-Balance.jpg?imwidth=332&imdensity=2" alt="World of Warcraft" class="w-full">
+                        <div class="p-4">
+                            <!-- Icon -->
+                             <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                            <!-- gameName -->
+                            <h6 class="text-slate-400 font-bold mx-14">Battle.net Services</h6>
+                            <!-- gameTitle -->
+                            <h3 class="text-xl font-bold mb-2 mx-3">BattleTag Change Service</h3>
+                            <!-- description -->
+                            <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Game Services</p>
+                            <!-- Price -->
+                            <span class="text-xl font-bold mx-3">$10.00</span>
+                        </div>
+                    </div></a>
+                </div>
+                 <!-- 3 -->
+                 <div class="swiper-slide game-tile">
+                    <a href="https://us.shop.battle.net/en-us/product/diablo_ii_resurrected?p=74831"><div class="bg-gray-800 rounded-lg overflow-hidden">
+                        <img src="https://venturebeat.com/wp-content/uploads/2019/10/diablo2.jpg" alt="World of Warcraft" class="w-full h-[161px]">
+                        <div class="p-4">
+                            <!-- Icon -->
+                             <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                            <!-- gameName -->
+                            <h6 class="text-slate-400 font-bold mx-14">Diablo II</h6>
+                            <!-- gameTitle -->
+                            <h3 class="text-xl font-bold mb-2 mx-3">Diablo II: Resurrected Mode</h3>
+                            <!-- description -->
+                            <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Evil is Resurrected</p>
+                            <!-- Price -->
+                            <span class="text-xl font-bold mx-3">$39.99</span>
+                        </div>
+                    </div></a>
+                </div>
+                 <!-- 4 -->
+                 <div class="swiper-slide game-tile">
+                    <a href="https://us.shop.battle.net/en-us/product/overwatch-coins"><div class="bg-gray-800 rounded-lg overflow-hidden">
+                        <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt5387d7cefaf9923d/6334e1997e84e17596f9c816/Coins_960x540.png?imwidth=332&imdensity=2" alt="World of Warcraft" class="w-full h-[160px]">
+                        <div class="p-4">
+                            <!-- Icon -->
+                             <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                            <!-- gameName -->
+                            <h6 class="text-slate-400 font-bold mx-14">Overwatch 2</h6>
+                            <!-- gameTitle -->
+                            <h3 class="text-xl font-bold mb-2 mx-3">Overwatch® 2 – Overwatch Coins</h3>
+                            <!-- description -->
+                            <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Use Overwatch Coins to Get the Premium Battle Pass and More!</p>
+                            <!-- Price -->
+                            <span class="text-xl font-bold mx-3 ">$4.99</span>
+                        </div>
+                    </div></a>
+                </div>
+                <!-- 5 -->
+                <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/product/world-of-warcraft-mists-of-pandaria-classic-upgrades?p=1891542"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/bltaa1f74a488f0da58/67ace2c34b52ffe403e774fe/WoW_ClassicMOPBundle_BnetShop_BrowsingCard_Heroic_1920x1080.png?imwidth=332&imdensity=2" alt="World of Warcraft" class="w-full">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">World of Warcraft Mists of Pandaria</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">Sha-Infused Heroic Pack</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Mists of Pandaria Classic will be included with Subscription or Game Time. Get a bounty of Sha-infused cosmetics for both Modern and Classic Progression now!</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3">$39.99</span>
+                    </div>
+                </div></a>
+                </div>
+                <!-- 6 -->
+                <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/product/diablo-iv?p=1766298"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/bltacdc7f5c58a2bca4/66568f9142baa4797b6aeadb/DIA_DIV_X1_BNET_PRE_PURCHASE_static_browsing_card_standard_1920x1080.png?imwidth=332&imdensity=2" alt="World of Warcraft" class="w-full">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">Diablo IV</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">Diablo® IV: Vessel of Hatred - Standard</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Vessel of Hatred Available Now!</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3">$39.99</span>
+                    </div>
+                </div></a>
+                </div>
+                <!-- 7 -->
+                <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/family/call-of-duty"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt6eab8ebc74b0a118/6647c638958c44bf1e3611be/-Bnet_Game-Card_Product_browsing-EN-960x540_(4).jpg?imwidth=332&imdensity=2" alt="World of Warcraft" class="w-full">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">Call of Duty</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">Call of Duty®: Black Ops 6</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Action Shooter</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3">$69.99</span>
+                    </div>
+                </div></a>
+                </div>
+                <!-- 8 -->
+                <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/product/overwatch-starter-pack?p=1890334"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt5f495bf737436c89/67aa70f6e1fda22196f85686/OW2_S15_StarterPack_BNET_Shop_ProductAssetGallery_1920x1080.png?imwidth=332&imdensity=2" alt="World of Warcraft" class="w-full h-[162px]">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">Overwatch 2</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">Overwatch® 2 Starter Pack: Season 15</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">Get a head start to the season with 1000 Overwatch Coins and Bixi Hazard!</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3">$9.99</span>
+                    </div>
+                </div></a>
+                </div>
+                <!-- 9 -->
+                <div class="swiper-slide game-tile">
+                   <a href="https://us.shop.battle.net/en-us/product/overwatch-battle-pass"> <div class="bg-gray-800 rounded-lg overflow-hidden">
+                    <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt552eb8f576520594/67aa71dff3d509f7541fd00b/OW2_2025_S15-Premium-BP-BNET_SHOP-assetgallery_1920x1080.png?imwidth=332&imdensity=2" alt="World of Warcraft" class="w-full h-[162px]">
+                    <div class="p-4">
+                        <!-- Icon -->
+                         <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                        <!-- gameName -->
+                        <h6 class="text-slate-400 font-bold mx-14">Overwatch 2</h6>
+                        <!-- gameTitle -->
+                        <h3 class="text-xl font-bold mb-2 mx-3">Overwatch® 2 Premium Battle Pass: Season 15</h3>
+                        <!-- description -->
+                        <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">In-game content</p>
+                        <!-- Price -->
+                        <span class="text-xl font-bold mx-3">$39.99</span>
+                    </div>
+                </div></a>
+                </div>
+                <!-- 10 -->
+                <div class="swiper-slide game-tile">
+                    <a href="https://us.shop.battle.net/en-us/product/warcraft-3-reforged?p=44414"><div class="bg-gray-800 rounded-lg overflow-hidden">
+                        <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt1953c897e611639b/67325d79d32591b8409e778b/Feature1_Reforged_20_Patch.png?imwidth=332&imdensity=2" alt="World of Warcraft" class="w-full h-[162px]">
+                        <div class="p-4">
+                            <!-- Icon -->
+                             <img src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt38fbd5bc534f9d8d/666b3646e3720f794c00428c/-Bnet_Game-Shop_Icon-EN-1080x1080.svg" alt="" class="w-[35px] absolute mt-2 mx-3">
+                            <!-- gameName -->
+                            <h6 class="text-slate-400 font-bold mx-14">Warcraft III</h6>
+                            <!-- gameTitle -->
+                            <h3 class="text-xl font-bold mb-2 mx-3">Warcraft® III: Reforged Game</h3>
+                            <!-- description -->
+                            <p class="text-yellow-400 mb-4 mx-3 line-clamp-1">A major new update is live with graphical improvements, improved functionality, UI features, and more!</p>
+                            <!-- Price -->
+                            <span class="text-xl font-bold mx-3">$29.99</span>
+                        </div>
+                    </div></a>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+
+     <!-- End Most Gifted -->
+     <!--  -->
+     <!--  -->
+     <!-- End Products -->
+      <!--  -->
+     <!-- download bakhsh -->
+      <section class="relative w-full min-h-[500px] flex justify-center items-center overflow-hidden my-12">
+        <!-- پس زمینه با افکت تاری -->
+        <div class="absolute inset-0 bg-download-section brightness-50 -z-10"></div>
+        
+        <!-- محتوای بخش دانلود -->
+        <div class="text-center p-10 max-w-4xl text-white">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 drop-shadow-lg">Dive into adventure</h1>
+            <p class="text-xl md:text-2xl mb-8 leading-relaxed text-slate-400">
+                Download Battle.net and join a community of millions.
+            </p>
+            <a href="https://download.battle.net/en-us?product=bnetdesk&platform=windows">
+                <button id="downloadBtn" class="bg-blue-500 hover:bg-green-600 text-white px-12 py-4 rounded text-xl font-medium transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-xl active:translate-y-0.5">
+                    Download Free For Windows
+                    </button>
+            </a>
+            
+            <!-- وضعیت دانلود (اختیاری) -->
+            <div id="downloadStatus" class="mt-6 text-lg hidden">
+                <span class="animate-pulse">در حال آماده‌سازی دانلود...</span>
+            </div>
+        </div>
+    </section>
+
+     <!--  -->
+    <!-- Footer -->
+
+    {% include "includes/footer.html" %}
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // Initialize hero swiper
+        const heroSwiper = new Swiper('.heroSwiper', {
+            loop: true,
+            autoplay: {
+                delay: 5000,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+
+        // Initialize games swiper
+        const gameSwiper = new Swiper('.gameSwiper', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                },
+                1024: {
+                    slidesPerView: 3,
+                },
+                1280: {
+                    slidesPerView: 4,
+                },
+                1400: {
+                    slidesPerView: 5,
+                }
+            }
+        });
+
+        const toggleButton = document.getElementById('toggleButton');
+        const cardContainer = document.getElementById('cardContainer');
+        const closeButton = document.getElementById('closeButton');
+
+        toggleButton.addEventListener('click', () => {
+            cardContainer.style.width = cardContainer.style.width === '350px' ? '0' : '350px';
+        });
+
+        closeButton.addEventListener('click', () => {
+            cardContainer.style.width = '0';
+        });
+
+         // bakhsh download js 
+            downloadBtn.addEventListener('click', function() {
+                
+                downloadStatus.classList.remove('hidden');    
+
+                this.classList.add('bg-green-700', 'cursor-not-allowed');
+                this.innerHTML = 'لطفاً منتظر بمانید...';
+            
+                setTimeout(() => {
+                    
+                    alert('دانلود با موفقیت آغاز شد!');
+                    
+                
+                    this.classList.remove('bg-green-700', 'cursor-not-allowed');
+                    this.innerHTML = 'دانلود رایگان';
+                    downloadStatus.classList.add('hidden');
+                }, 2000);
+            });
+
+
+             // شبیه‌سازی لودینگ با نوار پیشرفت
+        function simulateBattleNetLoading() {
+            const progressBar = document.querySelector('.battle-net-progress-bar');
+            const loadingText = document.querySelector('.battle-net-loading-text');
+            let progress = 0;
+            
+            const interval = setInterval(() => {
+                progress += 2;
+                progressBar.style.width = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    loadingText.textContent = "Ready!";
+                    
+                    // محو کردن لودینگ بعد از تکمیل
+                    setTimeout(() => {
+                        document.querySelector('.battle-net-loading').style.opacity = '0';
+                        document.getElementById('main-content').style.display = 'block';
+                        
+                        setTimeout(() => {
+                            document.querySelector('.battle-net-loading').style.display = 'none';
+                        }, 500);
+                    }, 500);
+                } else if (progress >= 70) {
+                    loadingText.textContent = "Almost there...";
+                } else if (progress >= 40) {
+                    loadingText.textContent = "Loading game data...";
+                }
+            }, 50);
+        }
+        
+        // شروع لودینگ وقتی صفحه کاملاً لود شد
+        window.addEventListener('load', simulateBattleNetLoading);
+
+
+    </script>
+</body>
+</html>
